@@ -1,0 +1,16 @@
+[
+  {
+    "id": "1",
+    "title": "Introduction to Data Analysis",
+    "date": "2025-10-13",
+    "summary": "A beginner-friendly introduction to data analysis using Python and R.",
+    "slug": "intro-to-data-analysis"
+  },
+  {
+    "id": "2",
+    "title": "Visualizing Data with Matplotlib",
+    "date": "2025-10-12",
+    "summary": "Learn how to create beautiful charts using Matplotlib in Python.",
+    "slug": "visualizing-data-matplotlib"
+  }
+]

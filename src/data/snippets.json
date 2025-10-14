@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "slug": "example-snippet",
+    "title": "Example Snippet",
+    "language": "JavaScript",
+    "code": "console.log('Hello, World!');"
+  },
+  {
+    "id": 2,
+    "slug": "fetch-api-example",
+    "title": "Fetch API Example",
+    "language": "JavaScript",
+    "code": "fetch('https://api.example.com/data')\n  .then(res => res.json())\n  .then(data => console.log(data));"
+  },
+  {
+    "id": 3,
+    "slug": "python-list-comprehension",
+    "title": "Python List Comprehension",
+    "language": "Python",
+    "code": "[x ** 2 for x in range(10)]"
+  },
+  {
+    "id": 4,
+    "slug": "react-component",
+    "title": "Simple React Component",
+    "language": "React",
+    "code": "export default function Hello() {\n  return <h1>Hello React!</h1>;\n}"
+  },
+  {
+    "id": 5,
+    "slug": "css-gradient",
+    "title": "CSS Gradient Background",
+    "language": "CSS",
+    "code": "body {\n  background: linear-gradient(135deg, #667eea, #764ba2);\n}"
+  }
+]
