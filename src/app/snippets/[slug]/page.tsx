@@ -2,28 +2,18 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import snippets from "@/data/snippets.json";
 
-// ---------- Types ----------
 interface PageProps {
-  params: Promise<{ slug: string }>;
-  searchParams: Promise<Record<string, string | string[] | undefined>>;
+  params: { slug: string };
 }
 
-type Snippet = {
-  id: number;
-  slug: string;
-  title: string;
-  language: string;
-  code: string;
-};
-
-// ---------- Static Params ----------
 export async function generateStaticParams() {
   return snippets.map((s) => ({ slug: s.slug }));
 }
 
-// ---------- Metadata ----------
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { slug } = params;
   const snippet = snippets.find((s) => s.slug === slug);
 
   if (!snippet) {
@@ -36,24 +26,27 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-// ---------- Page Component ----------
-export default async function SnippetPage({ params }: PageProps) {
-  const { slug } = await params;
+export default function SnippetPage({ params }: PageProps) {
+  const { slug } = params;
   const snippet = snippets.find((s) => s.slug === slug);
 
   if (!snippet) return notFound();
 
   return (
-    <div className="p-8">
-      <h1 className="text-3xl font-bold mb-4">{snippet.title}</h1>
-      <div className="flex items-center gap-2 mb-4">
-        <span className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-sm">
-          {snippet.language}
-        </span>
+    <div className="px-4 sm:px-6 md:px-8 py-10 max-w-3xl mx-auto">
+      <h1 className="text-3xl md:text-4xl font-bold mb-4 text-center md:text-left">
+        {snippet.title}
+      </h1>
+
+      <p className="text-gray-500 dark:text-gray-400 mb-4 text-center md:text-left">
+        Language: {snippet.language}
+      </p>
+
+      <div className="overflow-x-auto rounded-lg border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 shadow-sm">
+        <pre className="p-4 text-sm font-mono whitespace-pre-wrap break-words">
+          <code>{snippet.code}</code>
+        </pre>
       </div>
-      <pre className="bg-gray-100 dark:bg-gray-800 p-4 rounded overflow-x-auto text-sm border">
-        <code>{snippet.code}</code>
-      </pre>
     </div>
   );
 }
