@@ -19,7 +19,7 @@ body {
   color: var(--text-main);
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden; /* Prevents side-scrolling on mobile */
+  overflow-x: hidden;
 }
 
 /* 1. FORCE CENTER EVERYTHING */
@@ -55,18 +55,49 @@ body {
   font-weight: 800; 
   color: #fff; 
   letter-spacing: -0.5px;
+  cursor: pointer; /* Added pointer so people know it's clickable */
 }
 .dot { color: var(--accent); }
 
-.nav-links a {
+/* --- UPDATED NAV LINKS (For Tabs) --- */
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+/* Remove default button styles to make them look like links */
+.nav-item {
+  background: none;
+  border: none;
   color: var(--text-muted);
-  text-decoration: none;
-  margin-left: 2rem;
   font-size: 0.95rem;
   font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
   transition: color 0.2s;
+  
+  /* NUCLEAR OPTION: Removes the box/ring completely */
+  outline: none !important; 
+  box-shadow: none !important;
+  -webkit-tap-highlight-color: transparent; /* Removes blue flash on mobile */
 }
-.nav-links a:hover { color: var(--accent); }
+
+/* Ensures the box doesn't come back when you click/focus */
+.nav-item:focus, .nav-item:focus-visible, .nav-item:active {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.nav-item:hover { color: var(--accent); }
+
+/* Style for the currently active tab */
+.nav-item.active {
+  color: var(--accent); 
+  border-bottom: none;
+  font-weight: 600;
+}
 
 /* --- HERO SECTION --- */
 .hero {
@@ -83,7 +114,7 @@ body {
 .hero-content {
   max-width: 800px;
   margin: 0 auto;
-  padding: 0 1rem; /* Adds padding so text doesn't touch screen edges */
+  padding: 0 1rem;
 }
 
 .greeting { 
@@ -106,8 +137,8 @@ body {
 
 .highlight { 
   background: linear-gradient(90deg, #38bdf8, #818cf8); 
-  background-clip: text;           /* <--- Add this Standard line */
-  -webkit-background-clip: text;   /* Keep this for Safari/Chrome */
+  background-clip: text;
+  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent; 
 }
 
@@ -128,22 +159,28 @@ body {
   text-decoration: none; 
   font-weight: 600; 
   transition: transform 0.2s;
+  cursor: pointer;
+  border: none;
+  font-size: 1rem;
+  font-family: inherit;
+  outline: none !important; /* Removes focus ring on these buttons too */
 }
 
 .btn-primary { background: var(--accent); color: #0f172a; }
 .btn-secondary { border: 1px solid var(--border); color: #fff; background: transparent; }
 .btn:hover { transform: translateY(-2px); }
 
-/* --- SECTIONS & LAYOUT --- */
-.section, .section-alt { 
-  padding: 6rem 2rem; 
-  width: 100%; 
+/* --- TAB CONTENT SECTIONS --- */
+.section-tab {
+  padding: 8rem 2rem; 
+  min-height: 100vh; 
+  width: 100%;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.section-alt { background-color: var(--bg-card); }
+
 .container { 
   max-width: 1000px; 
   margin: 0 auto; 
@@ -166,6 +203,16 @@ h2::after {
   background: var(--accent);
   margin: 10px auto 0 auto; 
   border-radius: 2px;
+}
+
+/* --- ANIMATION (Fade In) --- */
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* --- BLOG CARDS --- */
@@ -231,40 +278,33 @@ h2::after {
 }
 
 /* =========================================
-   MOBILE RESPONSIVENESS (The Fix)
+   MOBILE RESPONSIVENESS
    ========================================= */
 @media (max-width: 768px) {
   
-  /* 1. Shrink the huge title text */
-  .title {
-    font-size: 2.5rem; /* Reduced from 4rem */
-  }
+  .title { font-size: 2.5rem; }
 
-  /* 2. Adjust Navbar for small screens */
   .navbar {
-    flex-direction: column; /* Stack logo on top of links */
+    flex-direction: column; 
     padding: 1rem;
     gap: 1rem;
   }
 
   .nav-links {
     display: flex;
-    flex-wrap: wrap; /* Allow links to wrap to next line */
+    flex-wrap: wrap; 
     justify-content: center;
-    gap: 1rem; /* Space between links */
+    gap: 1rem; 
   }
 
-  .nav-links a {
-    margin-left: 0; /* Remove old margin */
+  .nav-item {
+    margin-left: 0; 
     font-size: 0.9rem;
   }
 
-  /* 3. Adjust spacing for sections */
-  .section, .section-alt {
-    padding: 4rem 1.5rem; /* Less padding on mobile */
+  .section-tab {
+    padding: 10rem 1.5rem 4rem 1.5rem; 
   }
 
-  .subtitle {
-    font-size: 1rem;
-  }
+  .subtitle { font-size: 1rem; }
 }
