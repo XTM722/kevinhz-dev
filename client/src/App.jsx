@@ -6,7 +6,8 @@ function App() {
   const [activeTab, setActiveTab] = useState('home')
 
   useEffect(() => {
-    fetch('/api')
+    // 👇 UPDATED: Pointing to your live Render Backend
+    fetch('https://kevinhz-api.onrender.com/api') 
       .then(res => {
         if (res.ok) setServerStatus('Online')
       })
