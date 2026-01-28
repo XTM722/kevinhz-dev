@@ -36,32 +36,74 @@ body {
 /* --- NAVIGATION BAR --- */
 .navbar {
   display: flex;
-  justify-content: space-between;
+  /* Removed justify-content: space-between; */
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 0.8rem 2rem; /* Slightly thinner navbar */
   position: fixed;
   width: 100%;
   top: 0;
   left: 0;
   background: rgba(15, 23, 42, 0.95);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(12px); /* Increased blur for modern look */
   z-index: 1000;
   border-bottom: 1px solid var(--border);
   box-sizing: border-box;
 }
+
+/* 1. Left Section (Logo) */
+.nav-item-left {
+  flex: 1; /* Takes up 1 part of the space */
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* 3. Right Section (GitHub Button) */
+.nav-item-right {
+  flex: 1; /* Takes up the same amount of space as the left */
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* New Small Navbar Button Style */
+.btn-small {
+  display: flex;
+  align-items: center;
+  background: rgba(56, 189, 248, 0.1); /* Subtle accent background */
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  color: var(--accent);
+  padding: 0.5rem 1rem;
+  border-radius: 20px; /* Rounded pill shape */
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-small:hover {
+  background: var(--accent);
+  color: var(--bg-dark); /* Switch to dark text on hover */
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(56, 189, 248, 0.2); /* Subtle glow */
+}
+
 
 .logo { 
   font-size: 1.5rem; 
   font-weight: 800; 
   color: #fff; 
   letter-spacing: -0.5px;
-  cursor: pointer; /* Added pointer so people know it's clickable */
+  cursor: pointer;
 }
 .dot { color: var(--accent); }
 
 /* --- UPDATED NAV LINKS (For Tabs) --- */
+/* 2. Center Section (Links) */
 .nav-links {
+  flex: 2; /* Takes up more space in the middle */
   display: flex;
+  justify-content: center; /* Centers the links within this section */
   gap: 2rem;
 }
 
@@ -77,13 +119,11 @@ body {
   font-family: inherit;
   transition: color 0.2s;
   
-  /* NUCLEAR OPTION: Removes the box/ring completely */
   outline: none !important; 
   box-shadow: none !important;
-  -webkit-tap-highlight-color: transparent; /* Removes blue flash on mobile */
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* Ensures the box doesn't come back when you click/focus */
 .nav-item:focus, .nav-item:focus-visible, .nav-item:active {
   outline: none !important;
   border: none !important;
@@ -163,7 +203,7 @@ body {
   border: none;
   font-size: 1rem;
   font-family: inherit;
-  outline: none !important; /* Removes focus ring on these buttons too */
+  outline: none !important;
 }
 
 .btn-primary { background: var(--accent); color: #0f172a; }
@@ -290,10 +330,22 @@ h2::after {
     gap: 1rem;
   }
 
+  /* On mobile, reset flex properties */
+  .nav-item-left, .nav-item-right, .nav-links {
+    flex: auto;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  /* Show the GitHub button on mobile now */
+  .nav-item-right {
+    display: flex; 
+    margin-top: 1rem;
+  }
+
   .nav-links {
     display: flex;
     flex-wrap: wrap; 
-    justify-content: center;
     gap: 1rem; 
   }
 
@@ -303,7 +355,7 @@ h2::after {
   }
 
   .section-tab {
-    padding: 10rem 1.5rem 4rem 1.5rem; 
+    padding: 11rem 1.5rem 4rem 1.5rem; /* Increased top padding for taller mobile nav */
   }
 
   .subtitle { font-size: 1rem; }
