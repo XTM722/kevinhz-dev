@@ -1,19 +1,15 @@
-require('dotenv').config();
-const express = require('express');
-const app = express();
-const cors = require('cors');
+const mongoose = require('mongoose');
+require('dotenv').config(); // Load the .env file
 
-// Middleware
-app.use(cors());
-app.use(express.json());
+// 1. Get the connection string from the secure file
+const MONGO_URI = process.env.MONGO_URI;
 
-// Test Route
-app.get('/', (req, res) => {
-    res.json({ message: "Server is running on Port 5000!" });
-});
+if (!MONGO_URI) {
+  console.error("❌ FATAL ERROR: MONGO_URI is missing in .env file");
+  process.exit(1); // Stop the server if no database key
+}
 
-// Start Server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+// 2. Connect to MongoDB Atlas (Cloud)
+mongoose.connect(MONGO_URI)
+  .then(() => console.log('✅ MongoDB Connected (Online)'))
+  .catch(err => console.error('❌ MongoDB Connection Error:', err));
