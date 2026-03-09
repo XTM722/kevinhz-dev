@@ -1,4 +1,4 @@
-const BASE = 'http://localhost:5001/api'
+const BASE = 'https://kevinhz-api.onrender.com/api'
 
 function getToken() {
   return localStorage.getItem('admin_token')
