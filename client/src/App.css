@@ -1,16 +1,14 @@
-/* --- GLOBAL RESET & VARIABLES --- */
+/* --- VARIABLES --- */
 :root {
-  --bg-dark: #0f172a;       
-  --bg-card: #1e293b;       
-  --text-main: #f8fafc;     
-  --text-muted: #94a3b8;    
-  --accent: #38bdf8;        
-  --border: #334155;        
+  --bg-dark: #0f172a;
+  --bg-card: #1e293b;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --accent: #38bdf8;
+  --border: #334155;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
@@ -22,92 +20,64 @@ body {
   overflow-x: hidden;
 }
 
-/* 1. FORCE CENTER EVERYTHING */
 #root {
   max-width: 100%;
+  width: 100%;
   margin: 0 auto;
   padding: 0;
-  text-align: center; 
+  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* --- NAVIGATION BAR --- */
+/* --- NAVBAR --- */
 .navbar {
   display: flex;
-  /* Removed justify-content: space-between; */
   align-items: center;
-  padding: 0.8rem 2rem; /* Slightly thinner navbar */
+  padding: 0.8rem 2rem;
   position: fixed;
   width: 100%;
   top: 0;
   left: 0;
   background: rgba(15, 23, 42, 0.95);
-  backdrop-filter: blur(12px); /* Increased blur for modern look */
+  backdrop-filter: blur(12px);
   z-index: 1000;
   border-bottom: 1px solid var(--border);
   box-sizing: border-box;
 }
 
-/* 1. Left Section (Logo) */
 .nav-item-left {
-  flex: 1; /* Takes up 1 part of the space */
+  flex: 1;
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
 
-/* 3. Right Section (GitHub Button) */
 .nav-item-right {
-  flex: 1; /* Takes up the same amount of space as the left */
+  flex: 1;
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
 
-/* New Small Navbar Button Style */
-.btn-small {
-  display: flex;
-  align-items: center;
-  background: rgba(56, 189, 248, 0.1); /* Subtle accent background */
-  border: 1px solid rgba(56, 189, 248, 0.25);
-  color: var(--accent);
-  padding: 0.5rem 1rem;
-  border-radius: 20px; /* Rounded pill shape */
-  text-decoration: none;
-  font-size: 0.85rem;
-  font-weight: 600;
-  transition: all 0.2s ease;
-}
-
-.btn-small:hover {
-  background: var(--accent);
-  color: var(--bg-dark); /* Switch to dark text on hover */
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(56, 189, 248, 0.2); /* Subtle glow */
-}
-
-
-.logo { 
-  font-size: 1.5rem; 
-  font-weight: 800; 
-  color: #fff; 
-  letter-spacing: -0.5px;
-  cursor: pointer;
-}
-.dot { color: var(--accent); }
-
-/* --- UPDATED NAV LINKS (For Tabs) --- */
-/* 2. Center Section (Links) */
 .nav-links {
-  flex: 2; /* Takes up more space in the middle */
+  flex: 2;
   display: flex;
-  justify-content: center; /* Centers the links within this section */
+  justify-content: center;
   gap: 2rem;
 }
 
-/* Remove default button styles to make them look like links */
+.logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.5px;
+  cursor: pointer;
+}
+
+.dot { color: var(--accent); }
+
 .nav-item {
   background: none;
   border: none;
@@ -118,13 +88,14 @@ body {
   padding: 0;
   font-family: inherit;
   transition: color 0.2s;
-  
-  outline: none !important; 
+  outline: none !important;
   box-shadow: none !important;
   -webkit-tap-highlight-color: transparent;
 }
 
-.nav-item:focus, .nav-item:focus-visible, .nav-item:active {
+.nav-item:focus,
+.nav-item:focus-visible,
+.nav-item:active {
   outline: none !important;
   border: none !important;
   box-shadow: none !important;
@@ -132,20 +103,39 @@ body {
 
 .nav-item:hover { color: var(--accent); }
 
-/* Style for the currently active tab */
 .nav-item.active {
-  color: var(--accent); 
-  border-bottom: none;
+  color: var(--accent);
   font-weight: 600;
 }
 
-/* --- HERO SECTION --- */
+.btn-small {
+  display: flex;
+  align-items: center;
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  color: var(--accent);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-small:hover {
+  background: var(--accent);
+  color: var(--bg-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(56, 189, 248, 0.2);
+}
+
+/* --- HERO --- */
 .hero {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center; 
-  justify-content: center; 
+  align-items: center;
+  justify-content: center;
   text-align: center;
   padding-top: 60px;
   width: 100%;
@@ -157,47 +147,52 @@ body {
   padding: 0 1rem;
 }
 
-.greeting { 
-  color: var(--accent); 
-  font-size: 1.1rem; 
+.greeting {
+  color: var(--accent);
+  font-size: 1.1rem;
   font-weight: 600;
-  margin-bottom: 1rem; 
-  text-transform: uppercase; 
+  margin-bottom: 1rem;
+  text-transform: uppercase;
   letter-spacing: 2px;
   padding: 0;
 }
 
-.title { 
-  font-size: 4rem; 
-  line-height: 1.1; 
-  margin: 0 0 1.5rem 0; 
-  color: #fff; 
+.title {
+  font-size: 4rem;
+  line-height: 1.1;
+  margin: 0 0 1.5rem 0;
+  color: #fff;
   font-weight: 800;
 }
 
-.highlight { 
-  background: linear-gradient(90deg, #38bdf8, #818cf8); 
+.highlight {
+  background: linear-gradient(90deg, #38bdf8, #818cf8);
   background-clip: text;
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent; 
+  -webkit-text-fill-color: transparent;
 }
 
-.subtitle { 
-  color: var(--text-muted); 
-  font-size: 1.25rem; 
-  max-width: 600px; 
-  margin: 0 auto 2.5rem auto; 
-  line-height: 1.6; 
+.subtitle {
+  color: var(--text-muted);
+  font-size: 1.25rem;
+  max-width: 600px;
+  margin: 0 auto 2.5rem auto;
+  line-height: 1.6;
 }
 
 /* --- BUTTONS --- */
-.cta-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.cta-group {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
 
-.btn { 
-  padding: 0.8rem 2rem; 
-  border-radius: 8px; 
-  text-decoration: none; 
-  font-weight: 600; 
+.btn {
+  padding: 0.8rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
   transition: transform 0.2s;
   cursor: pointer;
   border: none;
@@ -210,10 +205,10 @@ body {
 .btn-secondary { border: 1px solid var(--border); color: #fff; background: transparent; }
 .btn:hover { transform: translateY(-2px); }
 
-/* --- TAB CONTENT SECTIONS --- */
+/* --- TAB SECTIONS --- */
 .section-tab {
-  padding: 8rem 2rem; 
-  min-height: 100vh; 
+  padding: 8rem 2rem;
+  min-height: 100vh;
   width: 100%;
   box-sizing: border-box;
   display: flex;
@@ -221,46 +216,45 @@ body {
   align-items: center;
 }
 
-.container { 
-  max-width: 1000px; 
-  margin: 0 auto; 
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
   text-align: center;
   width: 100%;
 }
 
-h2 { 
-  font-size: 2rem; 
-  margin-bottom: 2rem; 
+h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
   padding: 0;
   display: inline-block;
   position: relative;
 }
+
 h2::after {
   content: '';
   display: block;
   width: 50px;
   height: 4px;
   background: var(--accent);
-  margin: 10px auto 0 auto; 
+  margin: 10px auto 0 auto;
   border-radius: 2px;
 }
 
-/* --- ANIMATION (Fade In) --- */
-.fade-in {
-  animation: fadeIn 0.5s ease-in-out;
-}
+/* --- ANIMATION --- */
+.fade-in { animation: fadeIn 0.5s ease-in-out; }
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 /* --- BLOG CARDS --- */
-.card-grid { 
-  display: grid; 
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-  gap: 2rem; 
-  text-align: left; 
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  text-align: left;
 }
 
 .card {
@@ -270,24 +264,27 @@ h2::after {
   border-radius: 12px;
   transition: all 0.2s ease;
 }
+
 .card:hover { transform: translateY(-5px); border-color: var(--accent); }
 .card h3 { margin-top: 0; font-size: 1.5rem; }
 .card .date { font-size: 0.85rem; color: var(--text-muted); display: block; margin-top: 1.5rem; }
 
-/* --- CHANGELOG LIST --- */
-.changelog-list { 
-  list-style: none; 
-  padding: 0; 
-  max-width: 600px; 
-  margin: 0 auto; 
-  text-align: left; 
+/* --- CHANGELOG --- */
+.changelog-list {
+  list-style: none;
+  padding: 0;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
 }
-.changelog-list li { 
-  margin-bottom: 1.5rem; 
-  border-left: 2px solid var(--border); 
-  padding-left: 1.5rem; 
+
+.changelog-list li {
+  margin-bottom: 1.5rem;
+  border-left: 2px solid var(--border);
+  padding-left: 1.5rem;
   position: relative;
 }
+
 .changelog-list li::before {
   content: '';
   position: absolute;
@@ -298,16 +295,22 @@ h2::after {
   background: var(--accent);
   border-radius: 50%;
 }
-.changelog-list .date { color: var(--accent); font-family: monospace; margin-right: 1rem; }
+
+.changelog-list .date {
+  color: var(--accent);
+  font-family: monospace;
+  margin-right: 1rem;
+}
 
 /* --- BADGES --- */
-.tools-grid { 
-  display: flex; 
-  gap: 1rem; 
-  flex-wrap: wrap; 
-  justify-content: center; 
-  margin-top: 1rem; 
+.tools-grid {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1rem;
 }
+
 .badge {
   background: rgba(56, 189, 248, 0.1);
   color: var(--accent);
@@ -317,46 +320,64 @@ h2::after {
   font-size: 0.9rem;
 }
 
-/* =========================================
-   MOBILE RESPONSIVENESS
-   ========================================= */
+/* --- SKILL BARS --- */
+.skills-section {
+  margin-top: 3rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+
+.skills-title {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.skill-item { margin-bottom: 1.4rem; }
+
+.skill-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+}
+
+.skill-name { font-size: 0.95rem; font-weight: 500; color: var(--text-main); }
+.skill-level { font-size: 0.85rem; color: var(--accent); font-family: monospace; }
+
+.skill-track {
+  width: 100%;
+  height: 6px;
+  background: var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.skill-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #38bdf8, #818cf8);
+  border-radius: 999px;
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- MOBILE --- */
 @media (max-width: 768px) {
-  
   .title { font-size: 2.5rem; }
 
-  .navbar {
-    flex-direction: column; 
-    padding: 1rem;
-    gap: 1rem;
-  }
+  .navbar { flex-direction: column; padding: 1rem; gap: 1rem; }
 
-  /* On mobile, reset flex properties */
-  .nav-item-left, .nav-item-right, .nav-links {
-    flex: auto;
-    width: 100%;
-    justify-content: center;
-  }
-  
-  /* Show the GitHub button on mobile now */
-  .nav-item-right {
-    display: flex; 
-    margin-top: 1rem;
-  }
+  .nav-item-left,
+  .nav-item-right,
+  .nav-links { flex: auto; width: 100%; justify-content: center; }
 
-  .nav-links {
-    display: flex;
-    flex-wrap: wrap; 
-    gap: 1rem; 
-  }
-
-  .nav-item {
-    margin-left: 0; 
-    font-size: 0.9rem;
-  }
-
-  .section-tab {
-    padding: 11rem 1.5rem 4rem 1.5rem; /* Increased top padding for taller mobile nav */
-  }
-
+  .nav-item-right { display: flex; margin-top: 1rem; }
+  .nav-links { display: flex; flex-wrap: wrap; gap: 1rem; }
+  .nav-item { margin-left: 0; font-size: 0.9rem; }
+  .section-tab { padding: 11rem 1.5rem 4rem 1.5rem; }
   .subtitle { font-size: 1rem; }
 }
