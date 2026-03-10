@@ -365,6 +365,99 @@ h2::after {
   transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* --- LANGUAGE SWITCH --- */
+.lang-switch {
+  display: flex;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 20px;
+  overflow: hidden;
+  background: rgba(56, 189, 248, 0.1);
+}
+
+.lang-switch button {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.3rem 0.7rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.lang-switch button:focus,
+.lang-switch button:focus-visible,
+.lang-switch button:active {
+  outline: none;
+  box-shadow: none;
+}
+
+.lang-switch button.active {
+  background: rgba(56, 189, 248, 0.15);
+  color: var(--accent);
+}
+
+.lang-switch button:hover {
+  background: rgba(56, 189, 248, 0.2);
+}
+
+/* --- FRIENDS GRID --- */
+.friends-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.friend-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.25rem;
+  text-decoration: none;
+  color: var(--text-main);
+  transition: all 0.2s ease;
+}
+
+.friend-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+}
+
+.friend-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.friend-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.friend-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.friend-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.4;
+}
+
 /* --- MOBILE --- */
 @media (max-width: 768px) {
   .title { font-size: 2.5rem; }
