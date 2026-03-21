@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './App.css'
 
-const API = 'http://localhost:5001/api'
+const API = import.meta.env.VITE_API_URL || 'http://localhost:5001/api'
 
 const SKILLS = [
   { name: 'React / Vite', level: 75 },
