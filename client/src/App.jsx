@@ -339,6 +339,7 @@ function ChangelogTab({ lang }) {
     { version: 'v1.2.0', en: 'Added animated skill progress bars to the Tools section.',                         zh: '在技术栈页面添加了动画技能进度条。' },
     { version: 'v1.1.0', en: 'UI Update: Converted single-page scroll to a tabbed application interface.',      zh: 'UI 更新：将单页滚动改为标签页应用界面。' },
     { version: 'v1.0.0', en: 'Portfolio Launch: Initial release with MERN Stack architecture.',                  zh: '作品集上线：基于 MERN Stack 架构的初始版本。' },
+    { version: 'v1.4.0', en: 'Added individual blog post pages with slug-based routing and bilingual reading support.', zh: '新增博客文章独立页面，支持基于 slug 的路由跳转与双语阅读。' },
   ]
 
   return (
