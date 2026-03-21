@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './App.css'
 
 const API = 'http://localhost:5001/api'
@@ -284,6 +285,7 @@ function BlogTab({ lang }) {
   const [posts, setPosts]     = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError]     = useState('')
+  const navigate              = useNavigate()
 
   useEffect(() => {
     fetch(`${API}/posts`)
@@ -303,7 +305,7 @@ function BlogTab({ lang }) {
         )}
         <div className="card-grid">
           {posts.map(post => (
-            <div className="card" key={post._id}>
+            <div className="card" key={post._id} onClick={() => navigate(`/blog/${post.slug}`)} style={{ cursor: 'pointer' }}>
               <h3>{post.title[lang] || post.title.en}</h3>
               <p>{post.excerpt?.[lang] || post.excerpt?.en || ''}</p>
               {post.tags?.length > 0 && (

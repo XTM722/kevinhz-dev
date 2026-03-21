@@ -1,0 +1,134 @@
+:root {
+  --bg-dark: #0f172a;
+  --bg-card: #1e293b;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --accent: #38bdf8;
+  --border: #334155;
+}
+
+.post-page {
+  min-height: 100vh;
+  background: var(--bg-dark);
+  color: var(--text-main);
+  font-family: 'Inter', system-ui, sans-serif;
+  padding: 2rem 1.5rem 6rem 1.5rem;
+}
+
+.post-topbar {
+  max-width: 720px;
+  margin: 0 auto 3rem auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post-back {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-family: inherit;
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 0;
+  transition: opacity 0.2s;
+}
+
+.post-back:hover { opacity: 0.7; }
+
+/* reuse lang-switch from App.css */
+.lang-switch {
+  display: flex;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 20px;
+  overflow: hidden;
+  background: rgba(56, 189, 248, 0.1);
+}
+
+.lang-switch button {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.3rem 0.7rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.lang-switch button:focus,
+.lang-switch button:focus-visible,
+.lang-switch button:active { outline: none; box-shadow: none; }
+
+.lang-switch button.active {
+  background: rgba(56, 189, 248, 0.15);
+  color: var(--accent);
+}
+
+.lang-switch button:hover { background: rgba(56, 189, 248, 0.2); }
+
+/* article */
+.post-article {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.post-header { margin-bottom: 3rem; }
+
+.post-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+.post-tag {
+  background: rgba(56, 189, 248, 0.1);
+  color: var(--accent);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  font-size: 0.8rem;
+}
+
+.post-title {
+  font-size: 2.4rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin: 0 0 1rem 0;
+  color: #fff;
+}
+
+.post-meta {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.post-body {
+  color: #cbd5e1;
+  font-size: 1.1rem;
+  line-height: 1.9;
+  border-top: 1px solid var(--border);
+  padding-top: 2.5rem;
+}
+
+.post-body p { margin: 0 0 1.25rem 0; }
+
+.post-loading,
+.post-error {
+  text-align: center;
+  color: var(--text-muted);
+  margin-top: 6rem;
+  font-size: 1.1rem;
+}
+
+.post-error { color: #f87171; }
+
+@media (max-width: 768px) {
+  .post-title { font-size: 1.8rem; }
+  .post-body  { font-size: 1rem; }
+}
