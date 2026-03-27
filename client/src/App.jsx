@@ -335,6 +335,7 @@ function BlogTab({ lang }) {
 
 function ChangelogTab({ lang }) {
   const entries = [
+    { version: 'v1.5.0', en: 'Upgraded blog rendering with Markdown + syntax-highlighted code blocks, refined article UI, and hardened backend post sanitization/validation for safer publishing.', zh: '升级博客渲染：支持 Markdown 与代码高亮，优化文章阅读样式，并强化后端文章清洗与校验以提升发布安全性。' },
     { version: 'v1.4.0', en: 'Added individual blog post pages with slug-based routing and bilingual reading support.', zh: '新增博客文章独立页面，支持基于 slug 的路由跳转与双语阅读。' },
     { version: 'v1.3.0', en: 'Connected Blog to real MongoDB API with bilingual support and friend links page.', zh: '将博客连接到真实 MongoDB API，支持双语显示，并添加友情链接页面。' },
     { version: 'v1.2.0', en: 'Added animated skill progress bars to the Tools section.',                         zh: '在技术栈页面添加了动画技能进度条。' },

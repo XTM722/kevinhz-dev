@@ -1,5 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
+import Markdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
+import rehypeHighlight from 'rehype-highlight'
+import 'highlight.js/styles/github-dark.css'
 import './BlogPost.css'
 
 const API = import.meta.env.VITE_API_URL || 'http://localhost:5001/api'
@@ -11,6 +15,7 @@ export default function BlogPost() {
   const [loading, setLoading] = useState(true)
   const [error, setError]     = useState('')
   const [lang, setLang]       = useState('en')
+  const [copiedCodeIndex, setCopiedCodeIndex] = useState(null)
 
   useEffect(() => {
     fetch(`${API}/posts/${slug}`)
@@ -31,6 +36,23 @@ export default function BlogPost() {
       <button className="post-back" onClick={() => navigate('/')}>← Back</button>
     </div>
   )
+
+  const handleCopyCode = async (rawCode, index) => {
+    try {
+      if (!navigator?.clipboard?.writeText) {
+        throw new Error('Clipboard API not available')
+      }
+      await navigator.clipboard.writeText(rawCode)
+      setCopiedCodeIndex(index)
+      setTimeout(() => {
+        setCopiedCodeIndex(current => (current === index ? null : current))
+      }, 1800)
+    } catch {
+      setCopiedCodeIndex(null)
+      // eslint-disable-next-line no-alert
+      alert(lang === 'zh' ? '复制失败，请手动复制。' : 'Copy failed. Please copy manually.')
+    }
+  }
 
   return (
     <div className="post-page">
@@ -63,9 +85,45 @@ export default function BlogPost() {
         </header>
 
         <div className="post-body">
-          {(post.content[lang] || post.content.en || '').split('\n').map((para, i) =>
-            para.trim() ? <p key={i}>{para}</p> : <br key={i} />
-          )}
+          <Markdown
+            remarkPlugins={[remarkGfm]}
+            rehypePlugins={[rehypeHighlight]}
+            components={{
+              code({ inline, className, children, ...props }) {
+                const rawCode = String(children ?? '').replace(/\n$/, '')
+
+                if (inline) {
+                  return (
+                    <code className={className} {...props}>
+                      {children}
+                    </code>
+                  )
+                }
+
+                const codeIndex = `${className || 'plain'}-${rawCode.slice(0, 24)}`
+                const copied = copiedCodeIndex === codeIndex
+
+                return (
+                  <div className="post-code-wrap">
+                    <button
+                      type="button"
+                      className={`post-code-copy ${copied ? 'copied' : ''}`}
+                      onClick={() => handleCopyCode(rawCode, codeIndex)}
+                    >
+                      {copied
+                        ? (lang === 'zh' ? '已复制' : 'Copied')
+                        : (lang === 'zh' ? '复制' : 'Copy')}
+                    </button>
+                    <code className={className} {...props}>
+                      {children}
+                    </code>
+                  </div>
+                )
+              },
+            }}
+          >
+            {post.content[lang] || post.content.en || ''}
+          </Markdown>
         </div>
       </article>
     </div>
