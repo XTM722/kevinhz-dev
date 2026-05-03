@@ -361,6 +361,67 @@ h1, h2, h3, h4, p {
   height: 15px;
 }
 
+/* --- FRIEND AVATARS (极客风头像) --- */
+.friend-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+/* 覆盖原来 page-card span 默认的巨大下边距 */
+.friend-header span {
+  margin-bottom: 0 !important; 
+}
+
+.friend-avatar {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 8px; /* 微圆角，比纯圆更符合代码终端感 */
+  border: 1px dashed var(--line); /* 保持虚线风格统一 */
+  background: color-mix(in srgb, var(--surface) 80%, transparent);
+  padding: 2px; /* 给头像和边框留出一点呼吸空间 */
+}
+
+/* --- TEEMO MASTER LOGO --- */
+.brand-logo-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  background: #000; /* 图片背景是黑的，这里用黑色打底 */
+  border: 1px dashed var(--line);
+  overflow: hidden;
+  position: relative;
+  transition: border-color 0.3s ease;
+}
+
+.brand-logo-custom {
+  width: 110%; /* 稍微放大一点点隐藏掉边角 */
+  height: 110%;
+  object-fit: cover;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* 默认状态：稍微降低饱和度，融入背景 */
+.site-brand:not(:hover) .brand-logo-custom {
+  filter: grayscale(0.2) contrast(1.1);
+}
+
+/* 鼠标悬停：提莫“觉醒”效果 */
+.site-brand:hover .brand-logo-wrapper {
+  border-color: var(--accent);
+}
+
+.site-brand:hover .brand-logo-custom {
+  transform: scale(1.1);
+  /* 这里的 filter 会在悬停时给图片边缘加一层蓝色的荧光，非常赛博 */
+  filter: drop-shadow(0 0 5px var(--accent)) brightness(1.1);
+}
+
 /* --- ANIMATIONS & RESPONSIVE --- */
 @keyframes slow-drift {
   from { transform: translate3d(0, 0, 0); }

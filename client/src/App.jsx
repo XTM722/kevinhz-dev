@@ -61,7 +61,13 @@ function NavBar({ activeTab, setActiveTab, lang, setLang, mode, setMode }) {
   return (
     <header className="site-header">
       <a className="site-brand" onClick={() => setActiveTab('home')} style={{cursor: 'pointer'}}>
-        <span className="brand-mark">KH</span>
+        <div className="brand-logo-wrapper">
+          <img 
+            src="/teemo-swag.png" 
+            alt="Swag Teemo" 
+            className="brand-logo-custom" 
+          />
+        </div>
         <span>kevinhz.dev</span>
       </a>
       <nav className="site-nav">
@@ -174,6 +180,11 @@ function BlogTab({ lang }) {
 function ChangelogTab({ lang }) {
   const entries = [
     { 
+      version: 'v1.6.5', 
+      en: 'Branding: Finally swapped everything to the "Cool Teemo" look. Fixed the friend list logos too.', 
+      zh: '视觉更新：终于把全站都换成这只“拽哥提莫”了，顺便把之前坏掉的友链头像也修好啦。' 
+    },
+    { 
       version: 'v1.6.0', 
       en: 'Major UI Refactor: Transitioned to a pure Kevin Terminal layout with Quant Signal theme. Removed particle animations and added a tri-state (Light/Dark/System) toggle for a cleaner, data-focused aesthetic.', 
       zh: '重大 UI 重构：全面切换至 Terminal 极客终端布局与 Quant Signal 主题。移除粒子动画，新增三态（亮/暗/系统）主题切换，打造更纯粹、专注的数据控制台风格。' 
@@ -249,7 +260,14 @@ function FriendsTab({ lang }) {
       <section className="page-grid">
         {links.map(link => (
           <article className="page-card" key={link._id}>
-            <span>{link.name}</span>
+            {/* 👇 新增的头部结构：包含头像和名字 */}
+            <div className="friend-header">
+              {link.avatar && (
+                <img src={link.avatar} alt={link.name} className="friend-avatar" />
+              )}
+              <span>{link.name}</span>
+            </div>
+            
             <p>{link.description?.[lang] || ''}</p>
             <a href={link.url} target="_blank" rel="noreferrer">Visit →</a>
           </article>
