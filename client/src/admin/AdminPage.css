@@ -1,4 +1,5 @@
 /* ─── OVERRIDE GLOBAL ROOT STYLES ───────────────────────────────────────────── */
+/* 确保后台模式下内容区横向撑满，不居中，符合管理台直觉 */
 body.admin-mode #root {
   max-width: 100% !important;
   width: 100% !important;
@@ -8,20 +9,20 @@ body.admin-mode #root {
   padding: 0 !important;
 }
 
-/* ─── VARIABLES ─────────────────────────────────────────────────────────────── */
+/* ─── VARIABLES (完全继承前台 quantSignalTheme) ─────────────────────────────── */
 :root {
-  --admin-bg:      #0a0f1e;
-  --admin-surface: #111827;
-  --admin-border:  #1e2d45;
-  --admin-accent:  #38bdf8;
-  --admin-danger:  #f87171;
-  --admin-success: #4ade80;
-  --admin-text:    #f1f5f9;
-  --admin-muted:   #64748b;
+  /* 这里的变量会自动跟随 App.jsx 里的主题切换 (Light/Dark/System) */
+  --admin-bg:      var(--bg);
+  --admin-surface: var(--surface);
+  --admin-border:  var(--line);
+  --admin-accent:  var(--accent);
+  --admin-danger:  #f87171; /* 保持红色警报色 */
+  --admin-success: var(--warm); /* 统一使用前台的绿色 */
+  --admin-text:    var(--text);
+  --admin-muted:   var(--muted);
 }
 
 /* ─── LAYOUT ─────────────────────────────────────────────────────────────────── */
-
 .admin-layout {
   display: flex;
   min-height: 100vh;
@@ -31,13 +32,12 @@ body.admin-mode #root {
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
 }
 
-/* ─── SIDEBAR ────────────────────────────────────────────────────────────────── */
-
+/* ─── SIDEBAR (极简终端侧边栏) ───────────────────────────────────────────────── */
 .admin-sidebar {
-  width: 220px;
+  width: 240px;
   min-height: 100vh;
-  background: var(--admin-surface);
-  border-right: 1px solid var(--admin-border);
+  background: color-mix(in srgb, var(--admin-surface) 50%, transparent);
+  border-right: 1px dashed var(--admin-border); /* 换成虚线 */
   display: flex;
   flex-direction: column;
   padding: 2rem 1.5rem;
@@ -61,13 +61,14 @@ body.admin-mode #root {
   font-size: 0.65rem;
   letter-spacing: 2px;
   color: var(--admin-muted);
-  margin: 0 0 1.5rem 0;
+  margin: 0 0 2rem 0;
+  text-transform: uppercase;
 }
 
 .sidebar-nav {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.5rem;
   flex: 1;
 }
 
@@ -77,42 +78,51 @@ body.admin-mode #root {
   color: var(--admin-muted);
   font-family: inherit;
   font-size: 0.9rem;
-  padding: 0.6rem 0.75rem;
-  border-radius: 6px;
+  padding: 0.75rem;
+  border-radius: 4px;
   text-align: left;
   cursor: pointer;
-  transition: all 0.15s;
+  transition: all 0.2s;
 }
 
-.sidebar-nav button:hover { background: var(--admin-border); color: var(--admin-text); }
-.sidebar-nav button.active { background: rgba(56, 189, 248, 0.1); color: var(--admin-accent); }
+.sidebar-nav button:hover { 
+  background: color-mix(in srgb, var(--admin-accent) 10%, transparent); 
+  color: var(--admin-text); 
+}
 
-.logout-btn { margin-top: auto; width: 100%; }
+.sidebar-nav button.active { 
+  background: color-mix(in srgb, var(--admin-accent) 15%, transparent); 
+  color: var(--admin-accent);
+  border-left: 2px solid var(--admin-accent);
+}
+
+.logout-btn { 
+  margin-top: auto; 
+  border: 1px dashed var(--admin-danger) !important;
+}
 
 /* ─── MAIN CONTENT ───────────────────────────────────────────────────────────── */
-
 .admin-main {
-  margin-left: 220px;
+  margin-left: 240px;
   flex: 1;
-  padding: 2.5rem 3rem;
+  padding: 3rem;
   min-height: 100vh;
   background: var(--admin-bg);
   box-sizing: border-box;
 }
 
-.tab-content { width: 100%; }
-
 .tab-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
+  border-bottom: 1px dashed var(--admin-border);
+  padding-bottom: 1.5rem;
 }
 
-.tab-header h2 { font-size: 1.5rem; margin: 0; }
+.tab-header h2 { font-size: 1.5rem; margin: 0; letter-spacing: -0.5px; }
 
-/* ─── LOGIN ──────────────────────────────────────────────────────────────────── */
-
+/* ─── LOGIN (极简终端登录) ────────────────────────────────────────────────────── */
 .admin-login {
   min-height: 100vh;
   width: 100%;
@@ -124,247 +134,176 @@ body.admin-mode #root {
 
 .login-card {
   background: var(--admin-surface);
-  border: 1px solid var(--admin-border);
-  border-radius: 12px;
+  border: 1px dashed var(--admin-border); /* 换成虚线 */
   padding: 3rem;
   width: 100%;
-  max-width: 380px;
+  max-width: 400px;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.2rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
 .login-logo {
   font-size: 1.8rem;
   font-weight: 800;
-  color: var(--admin-text);
-  font-family: 'JetBrains Mono', monospace;
+  text-align: center;
 }
-
-.login-logo span { color: var(--admin-accent); }
 
 .login-sub {
   color: var(--admin-muted);
-  font-size: 0.85rem;
-  margin: 0 0 1rem 0;
-}
-
-.login-card form {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+  font-size: 0.8rem;
+  text-align: center;
+  margin-top: -10px;
+  font-family: var(--font-mono);
 }
 
 /* ─── FORM ELEMENTS ──────────────────────────────────────────────────────────── */
-
-.admin-input {
+.admin-input, .admin-textarea {
   width: 100%;
-  background: var(--admin-bg);
+  background: color-mix(in srgb, var(--admin-bg) 60%, transparent);
   border: 1px solid var(--admin-border);
   color: var(--admin-text);
-  padding: 0.65rem 0.9rem;
-  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  border-radius: 4px;
   font-family: inherit;
   font-size: 0.9rem;
   box-sizing: border-box;
-  transition: border-color 0.15s;
+  transition: all 0.2s;
 }
 
-.admin-input:focus {
+.admin-input:focus, .admin-textarea:focus {
   outline: none;
   border-color: var(--admin-accent);
-}
-
-.admin-textarea {
-  width: 100%;
   background: var(--admin-bg);
-  border: 1px solid var(--admin-border);
-  color: var(--admin-text);
-  padding: 0.65rem 0.9rem;
-  border-radius: 6px;
-  font-family: inherit;
-  font-size: 0.9rem;
-  box-sizing: border-box;
-  resize: vertical;
-  transition: border-color 0.15s;
-}
-
-.admin-textarea:focus {
-  outline: none;
-  border-color: var(--admin-accent);
 }
 
 .admin-label {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: var(--admin-muted);
-  letter-spacing: 1px;
   text-transform: uppercase;
-  margin-top: 0.5rem;
+  margin: 1rem 0 0.4rem;
   display: block;
+  font-weight: 700;
 }
 
-.admin-checkbox {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.9rem;
-  color: var(--admin-muted);
-  cursor: pointer;
-  margin-top: 0.5rem;
-}
-
-/* ─── BUTTONS ────────────────────────────────────────────────────────────────── */
-
+/* ─── BUTTONS (硬核风格) ──────────────────────────────────────────────────────── */
 .admin-btn {
-  padding: 0.6rem 1.25rem;
-  border-radius: 6px;
-  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 4px;
+  border: 1px solid transparent;
   font-family: inherit;
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  transition: all 0.15s;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  font-size: 0.85rem;
 }
 
-.admin-btn.primary { background: var(--admin-accent); color: #0a0f1e; }
-.admin-btn.primary:hover { opacity: 0.85; }
+.admin-btn.primary { 
+  background: var(--admin-accent); 
+  color: var(--admin-bg); 
+}
 
-.admin-btn.secondary { background: var(--admin-border); color: var(--admin-text); }
-.admin-btn.secondary:hover { background: #2a3a55; }
+.admin-btn.primary:hover { 
+  box-shadow: 0 0 15px var(--admin-accent);
+  transform: translateY(-1px);
+}
+
+.admin-btn.secondary { 
+  background: transparent; 
+  border-color: var(--admin-border); 
+  color: var(--admin-text); 
+}
 
 .admin-btn.danger {
-  background: rgba(248, 113, 113, 0.1);
+  background: transparent;
   color: var(--admin-danger);
-  border: 1px solid rgba(248, 113, 113, 0.2);
+  border: 1px dashed var(--admin-danger);
 }
 
-.admin-btn.danger:hover { background: rgba(248, 113, 113, 0.2); }
-.admin-btn.small { padding: 0.35rem 0.75rem; font-size: 0.8rem; }
-.admin-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-
-/* ─── POSTS LIST ─────────────────────────────────────────────────────────────── */
-
-.post-list { display: flex; flex-direction: column; gap: 0.75rem; }
-
-.post-row {
+/* ─── LISTS & ROWS ───────────────────────────────────────────────────────────── */
+.post-row, .link-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: var(--admin-surface);
-  border: 1px solid var(--admin-border);
-  border-radius: 8px;
-  padding: 1rem 1.25rem;
-  transition: border-color 0.15s;
+  border: 1px dashed var(--admin-border); /* 换成虚线 */
+  border-radius: 4px;
+  padding: 1.2rem;
+  margin-bottom: 0.8rem;
+  transition: border-color 0.2s;
 }
 
 .post-row:hover { border-color: var(--admin-accent); }
 
-.post-row-actions {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
+.status-dot.published { 
+  background: var(--admin-success); 
+  box-shadow: 0 0 8px var(--admin-success); 
 }
 
+/* 移除全局 H2 下划线干扰 */
+.admin-layout h2::after { display: none !important; }
+
+.post-row, .link-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: color-mix(in srgb, var(--admin-surface) 60%, transparent);
+  border: 1px dashed var(--admin-border) !important; /* 核心：虚线边框 */
+  border-radius: 4px;
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 0.8rem;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.post-row:hover, .link-row:hover {
+  border-color: var(--admin-accent) !important;
+  background: color-mix(in srgb, var(--admin-accent) 4%, transparent);
+  transform: translateX(4px); /* 悬停时轻微右移，增加交互感 */
+}
+
+/* --- 文章标题与信息 --- */
+.post-row strong {
+  font-family: var(--font-mono); /* 使用等宽字体 */
+  font-size: 1rem;
+  color: var(--admin-text);
+}
+
+.post-row .admin-muted {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+
+/* --- 友链头像优化 --- */
+.link-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px; /* 放弃圆形，改用小圆角硬核风格 */
+  border: 1px solid var(--admin-border);
+  filter: grayscale(0.5); /* 初始灰色，增加工业感 */
+  transition: all 0.3s;
+}
+
+.link-row:hover .link-avatar {
+  filter: grayscale(0);
+  border-color: var(--admin-accent);
+}
+
+/* --- 状态指示灯 (高亮效果) --- */
 .status-dot {
-  display: inline-block;
   width: 8px;
   height: 8px;
-  border-radius: 50%;
-  margin-right: 8px;
+  border-radius: 2px; /* 像素块风格 */
 }
 
-.status-dot.published { background: var(--admin-success); }
-.status-dot.draft     { background: var(--admin-muted); }
-
-/* ─── POST EDITOR ────────────────────────────────────────────────────────────── */
-
-.post-editor {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  max-width: 800px;
+.status-dot.published {
+  background: var(--admin-success);
+  box-shadow: 0 0 10px var(--admin-success); /* 发光效果 */
 }
 
-.editor-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.editor-header h2 { margin: 0; }
-
-.lang-toggle {
-  display: flex;
-  border: 1px solid var(--admin-border);
-  border-radius: 6px;
-  overflow: hidden;
-}
-
-.lang-toggle button {
-  background: none;
-  border: none;
-  color: var(--admin-muted);
-  font-family: inherit;
-  font-size: 0.85rem;
-  padding: 0.4rem 0.9rem;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-
-.lang-toggle button.active {
-  background: var(--admin-accent);
-  color: #0a0f1e;
-  font-weight: 600;
-}
-
-.editor-actions {
-  display: flex;
-  gap: 0.75rem;
-  margin-top: 1rem;
-  justify-content: flex-end;
-}
-
-/* ─── FRIEND LINKS ───────────────────────────────────────────────────────────── */
-
-.link-form {
-  background: var(--admin-surface);
-  border: 1px solid var(--admin-border);
-  border-radius: 8px;
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  margin-bottom: 2rem;
-}
-
-.link-list { display: flex; flex-direction: column; gap: 0.75rem; }
-
-.link-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: var(--admin-surface);
-  border: 1px solid var(--admin-border);
-  border-radius: 8px;
-  padding: 1rem 1.25rem;
-}
-
-.link-info { display: flex; align-items: center; gap: 0.75rem; }
-
-.link-info div { display: flex; flex-direction: column; gap: 0.2rem; }
-
-.link-avatar { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; }
-
-.link-url { font-size: 0.8rem; color: var(--admin-accent); text-decoration: none; }
-
-/* ─── MISC ───────────────────────────────────────────────────────────────────── */
-
-.admin-muted { color: var(--admin-muted); font-size: 0.85rem; }
-.admin-error { color: var(--admin-danger); font-size: 0.85rem; margin: 0; }
-
-/* override h2::after from App.css inside admin */
-.admin-layout h2::after,
-.admin-main h2::after {
-  display: none;
+.status-dot.draft {
+  background: var(--admin-muted);
+  box-shadow: none;
 }
